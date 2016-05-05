@@ -1,12 +1,17 @@
 /*
-  backbone.waiter
-*/
+    backbone.waiter
+    
+    Notice*
+    The majority of the code below was cherry picked from backbone.Marionette v2.4
+    https://github.com/marionettejs/backbone.marionette
+ */
 
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['backbone', 'underscore', 'jquery'], function (Backbone, _, $) {
             return factory(root, Backbone, _, $);
         });
+
     } else if (typeof exports !== 'undefined') {
         var _ = require('underscore');
         var $ = require('jquery');
