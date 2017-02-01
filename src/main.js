@@ -1,3 +1,3 @@
 
-const foo = 'bar';
-alert(foo);
+const foo = 'bar'
+console.log(foo)

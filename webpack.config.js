@@ -14,6 +14,9 @@ module.exports = {
     path: path.resolve(__dirname, './_dist'),
     filename: 'backbone.waiter.js',
     publicPath: '/assets',
+    library: 'backbone.waiter',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   devServer: {
     contentBase: path.resolve(__dirname, './test/live/index.html'),

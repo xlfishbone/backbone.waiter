@@ -1,10 +1,9 @@
-import {expect} from 'chai';
+import {expect} from 'chai'
 
 describe('', () => {
-    it('should be true', () => {
-        var t = true;
-        
-        expect(t).to.be.true;
+  it('should be true', () => {
+    var t = true
 
-    })
+    expect(t).to.be.true
+  })
 })

@@ -1,12 +1,12 @@
 
-let viewList: [];
+// let viewList = []
 
-function registerView(views) {
+// function registerView (views) {
 
-}
+// }
 
-function loadViewByEl(){
-  
-}
+// function loadViewByEl () {
 
-document.addEventListener('ready', loadViewByEl);
+// }
+
+// document.addEventListener('ready', loadViewByEl)
