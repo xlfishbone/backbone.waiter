@@ -1,4 +1,5 @@
-dist/*.js
+_dist/*.js
 config/*.js
 webpack.config.js
+tmp/*
 
