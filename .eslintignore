@@ -2,4 +2,4 @@ _dist/*.js
 config/*.js
 webpack.config.js
 tmp/*
-
+test/unit/coverage/*

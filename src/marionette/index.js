@@ -1,6 +1,5 @@
 import _ from 'lodash'
-import _extend from './backbone/extend'
-import Backbone from './backbone'
+import Backbone from '../bb/index'
 
 // Helpers
 // -------
@@ -9,7 +8,7 @@ import Backbone from './backbone'
 // -----------------
 
 // Borrow the Backbone `extend` method so we can use it as needed
-const extend = _extend
+const extend = Backbone.extend
 
 // Marionette.isNodeAttached
 // -------------------------
@@ -126,5 +125,6 @@ export default {
   normalizeMethods: normalizeMethods,
   normalizeUIString: normalizeUIString,
   normalizeUIKeys: normalizeUIKeys,
-  normalizeUIValues: normalizeUIValues
+  normalizeUIValues: normalizeUIValues,
+  _getValue: _getValue
 }

@@ -1,18 +1,17 @@
-import bbView from './backbone/view'
+import bbView from '../bb/view'
+import Mn from './index'
 import _ from 'lodash'
 
-// Waiter.BaseView
+// Mn.BaseView
 // -------------------
 
-const Waiter = {}
-
-Waiter.BaseView = bbView.extend({
+export default bbView.extend({
   isDestroyed: false,
 
   constructor: function (options) {
     this.render = _.bind(this.render, this)
 
-    options = Waiter._getValue(options, this)
+    options = Mn._getValue(options, this)
 
     // this exposes view options to the view initializer
     // this is a backfill since backbone removed the assignment
@@ -27,7 +26,7 @@ Waiter.BaseView = bbView.extend({
   // `{"@ui.foo": "bar"}`
   normalizeUIKeys: function (hash) {
     const uiBindings = _.result(this, '_uiBindings')
-    return Waiter.normalizeUIKeys(hash, uiBindings || _.result(this, 'ui'))
+    return Mn.normalizeUIKeys(hash, uiBindings || _.result(this, 'ui'))
   },
 
   // normalize the values of passed hash with the views `ui` selectors.
@@ -35,7 +34,7 @@ Waiter.BaseView = bbView.extend({
   normalizeUIValues: function (hash, properties) {
     const ui = _.result(this, 'ui')
     const uiBindings = _.result(this, '_uiBindings')
-    return Waiter.normalizeUIValues(hash, uiBindings || ui, properties)
+    return Mn.normalizeUIValues(hash, uiBindings || ui, properties)
   },
 
   bindUIElements: function () {
@@ -96,7 +95,7 @@ Waiter.BaseView = bbView.extend({
 
   // internal method to delegate DOM events and triggers
   _delegateDOMEvents: function (eventsArg) {
-    let events = Waiter._getValue(eventsArg || this.events, this)
+    let events = Mn._getValue(eventsArg || this.events, this)
 
     // normalize ui keys
     events = this.normalizeUIKeys(events)

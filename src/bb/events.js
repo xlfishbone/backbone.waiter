@@ -294,9 +294,5 @@ export default {
 
     eventsApi(triggerApi, this._events, name, void 0, args)
     return this
-  },
-
-  bind: this.on,
-
-  unbind: this.off
+  }
 }

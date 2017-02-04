@@ -12,6 +12,7 @@
 import _ from 'lodash'
 import Events from './events'
 import bbExtend from './extend'
+import bb$ from './bb$'
 
 // Creating a Backbone.View creates its initial element outside of the DOM,
 // if an existing element is not provided...
@@ -81,7 +82,7 @@ _.extend(View.prototype, Events, {
   // alternative DOM manipulation API and are only required to set the
   // `this.el` property.
   _setElement: function (el) {
-    this.$el = el instanceof Backbone.$ ? el : Backbone.$(el)
+    this.$el = el instanceof bb$ ? el : bb$(el)
     this.el = this.$el[0]
   },
 

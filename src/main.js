@@ -1,3 +1,8 @@
+import baseView from './marionette/baseview'
+import events from './bb/events'
 
-const foo = 'bar'
-console.log(foo)
+export default {
+  View: baseView,
+  Events: events
+}
+
