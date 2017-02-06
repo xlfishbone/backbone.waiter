@@ -165,5 +165,6 @@ _.extend(View.prototype, Events, {
   },
 
   extend: bbExtend
-
 })
+
+export default View

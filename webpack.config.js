@@ -13,8 +13,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './_dist'),
     filename: 'backbone.waiter.js',
-    publicPath: '/assets',
-    library: 'backbone.waiter',
+    //publicPath: '/assets',
+    library: 'Waiter',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
@@ -54,7 +54,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, './test/live/index.html'),
       template: path.resolve(__dirname, './test/live/index.html'),
-      inject: true,
+      inject: false,
     }),
     new FriendlyErrors(),
     new LodashModuleReplacementPlugin,    

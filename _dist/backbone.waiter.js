@@ -2,12 +2,12 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("$"));
 	else if(typeof define === 'function' && define.amd)
-		define("backbone.waiter", ["$"], factory);
+		define("Waiter", ["$"], factory);
 	else if(typeof exports === 'object')
-		exports["backbone.waiter"] = factory(require("$"));
+		exports["Waiter"] = factory(require("$"));
 	else
-		root["backbone.waiter"] = factory(root["$"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_66__) {
+		root["Waiter"] = factory(root["$"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_62__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -44,7 +44,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/assets";
+/******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -60,23 +60,513 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _baseview = __webpack_require__(1);
+	var _extend2 = __webpack_require__(1);
+
+	var _extend3 = _interopRequireDefault(_extend2);
+
+	var _baseview = __webpack_require__(17);
 
 	var _baseview2 = _interopRequireDefault(_baseview);
 
-	var _events = __webpack_require__(54);
+	var _events = __webpack_require__(50);
 
 	var _events2 = _interopRequireDefault(_events);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = {
+	var Waiter = {
 	  View: _baseview2.default,
 	  Events: _events2.default
 	};
 
+	(0, _extend3.default)(Waiter.prototype, _events2.default);
+
+	exports.default = Waiter;
+
 /***/ },
 /* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(2);
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var copyObject = __webpack_require__(3),
+	    createAssigner = __webpack_require__(9),
+	    keysIn = __webpack_require__(16);
+
+	/**
+	 * This method is like `_.assign` except that it iterates over own and
+	 * inherited source properties.
+	 *
+	 * **Note:** This method mutates `object`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @alias extend
+	 * @category Object
+	 * @param {Object} object The destination object.
+	 * @param {...Object} [sources] The source objects.
+	 * @returns {Object} Returns `object`.
+	 * @see _.assign
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * function Bar() {
+	 *   this.c = 3;
+	 * }
+	 *
+	 * Foo.prototype.b = 2;
+	 * Bar.prototype.d = 4;
+	 *
+	 * _.assignIn({ 'a': 0 }, new Foo, new Bar);
+	 * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
+	 */
+	var assignIn = createAssigner(function(object, source) {
+	  copyObject(source, keysIn(source), object);
+	});
+
+	module.exports = assignIn;
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var assignValue = __webpack_require__(4),
+	    baseAssignValue = __webpack_require__(5);
+
+	/**
+	 * Copies properties of `source` to `object`.
+	 *
+	 * @private
+	 * @param {Object} source The object to copy properties from.
+	 * @param {Array} props The property identifiers to copy.
+	 * @param {Object} [object={}] The object to copy properties to.
+	 * @param {Function} [customizer] The function to customize copied values.
+	 * @returns {Object} Returns `object`.
+	 */
+	function copyObject(source, props, object, customizer) {
+	  var isNew = !object;
+	  object || (object = {});
+
+	  var index = -1,
+	      length = props.length;
+
+	  while (++index < length) {
+	    var key = props[index];
+
+	    var newValue = customizer
+	      ? customizer(object[key], source[key], key, object, source)
+	      : undefined;
+
+	    if (newValue === undefined) {
+	      newValue = source[key];
+	    }
+	    if (isNew) {
+	      baseAssignValue(object, key, newValue);
+	    } else {
+	      assignValue(object, key, newValue);
+	    }
+	  }
+	  return object;
+	}
+
+	module.exports = copyObject;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseAssignValue = __webpack_require__(5),
+	    eq = __webpack_require__(8);
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Assigns `value` to `key` of `object` if the existing value is not equivalent
+	 * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+	 * for equality comparisons.
+	 *
+	 * @private
+	 * @param {Object} object The object to modify.
+	 * @param {string} key The key of the property to assign.
+	 * @param {*} value The value to assign.
+	 */
+	function assignValue(object, key, value) {
+	  var objValue = object[key];
+	  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
+	      (value === undefined && !(key in object))) {
+	    baseAssignValue(object, key, value);
+	  }
+	}
+
+	module.exports = assignValue;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var defineProperty = __webpack_require__(6);
+
+	/**
+	 * The base implementation of `assignValue` and `assignMergeValue` without
+	 * value checks.
+	 *
+	 * @private
+	 * @param {Object} object The object to modify.
+	 * @param {string} key The key of the property to assign.
+	 * @param {*} value The value to assign.
+	 */
+	function baseAssignValue(object, key, value) {
+	  if (key == '__proto__' && defineProperty) {
+	    defineProperty(object, key, {
+	      'configurable': true,
+	      'enumerable': true,
+	      'value': value,
+	      'writable': true
+	    });
+	  } else {
+	    object[key] = value;
+	  }
+	}
+
+	module.exports = baseAssignValue;
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(7);
+
+	var defineProperty = (function() {
+	  try {
+	    var func = getNative(Object, 'defineProperty');
+	    func({}, '', {});
+	    return func;
+	  } catch (e) {}
+	}());
+
+	module.exports = defineProperty;
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	/**
+	 * Gets the value at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} [object] The object to query.
+	 * @param {string} key The key of the property to get.
+	 * @returns {*} Returns the property value.
+	 */
+	function getValue(object, key) {
+	  return object == null ? undefined : object[key];
+	}
+
+	module.exports = getValue;
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	/**
+	 * Performs a
+	 * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+	 * comparison between two values to determine if they are equivalent.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to compare.
+	 * @param {*} other The other value to compare.
+	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+	 * @example
+	 *
+	 * var object = { 'a': 1 };
+	 * var other = { 'a': 1 };
+	 *
+	 * _.eq(object, object);
+	 * // => true
+	 *
+	 * _.eq(object, other);
+	 * // => false
+	 *
+	 * _.eq('a', 'a');
+	 * // => true
+	 *
+	 * _.eq('a', Object('a'));
+	 * // => false
+	 *
+	 * _.eq(NaN, NaN);
+	 * // => true
+	 */
+	function eq(value, other) {
+	  return value === other || (value !== value && other !== other);
+	}
+
+	module.exports = eq;
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseRest = __webpack_require__(10),
+	    isIterateeCall = __webpack_require__(15);
+
+	/**
+	 * Creates a function like `_.assign`.
+	 *
+	 * @private
+	 * @param {Function} assigner The function to assign values.
+	 * @returns {Function} Returns the new assigner function.
+	 */
+	function createAssigner(assigner) {
+	  return baseRest(function(object, sources) {
+	    var index = -1,
+	        length = sources.length,
+	        customizer = length > 1 ? sources[length - 1] : undefined,
+	        guard = length > 2 ? sources[2] : undefined;
+
+	    customizer = (assigner.length > 3 && typeof customizer == 'function')
+	      ? (length--, customizer)
+	      : undefined;
+
+	    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+	      customizer = length < 3 ? undefined : customizer;
+	      length = 1;
+	    }
+	    object = Object(object);
+	    while (++index < length) {
+	      var source = sources[index];
+	      if (source) {
+	        assigner(object, source, index, customizer);
+	      }
+	    }
+	    return object;
+	  });
+	}
+
+	module.exports = createAssigner;
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var identity = __webpack_require__(11),
+	    overRest = __webpack_require__(12),
+	    setToString = __webpack_require__(14);
+
+	/**
+	 * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+	 *
+	 * @private
+	 * @param {Function} func The function to apply a rest parameter to.
+	 * @param {number} [start=func.length-1] The start position of the rest parameter.
+	 * @returns {Function} Returns the new function.
+	 */
+	function baseRest(func, start) {
+	  return setToString(overRest(func, start, identity), func + '');
+	}
+
+	module.exports = baseRest;
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	/**
+	 * This method returns the first argument it receives.
+	 *
+	 * @static
+	 * @since 0.1.0
+	 * @memberOf _
+	 * @category Util
+	 * @param {*} value Any value.
+	 * @returns {*} Returns `value`.
+	 * @example
+	 *
+	 * var object = { 'a': 1 };
+	 *
+	 * console.log(_.identity(object) === object);
+	 * // => true
+	 */
+	function identity(value) {
+	  return value;
+	}
+
+	module.exports = identity;
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var apply = __webpack_require__(13);
+
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max;
+
+	/**
+	 * A specialized version of `baseRest` which transforms the rest array.
+	 *
+	 * @private
+	 * @param {Function} func The function to apply a rest parameter to.
+	 * @param {number} [start=func.length-1] The start position of the rest parameter.
+	 * @param {Function} transform The rest array transform.
+	 * @returns {Function} Returns the new function.
+	 */
+	function overRest(func, start, transform) {
+	  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+	  return function() {
+	    var args = arguments,
+	        index = -1,
+	        length = nativeMax(args.length - start, 0),
+	        array = Array(length);
+
+	    while (++index < length) {
+	      array[index] = args[start + index];
+	    }
+	    index = -1;
+	    var otherArgs = Array(start + 1);
+	    while (++index < start) {
+	      otherArgs[index] = args[index];
+	    }
+	    otherArgs[start] = transform(array);
+	    return apply(func, this, otherArgs);
+	  };
+	}
+
+	module.exports = overRest;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	/**
+	 * A faster alternative to `Function#apply`, this function invokes `func`
+	 * with the `this` binding of `thisArg` and the arguments of `args`.
+	 *
+	 * @private
+	 * @param {Function} func The function to invoke.
+	 * @param {*} thisArg The `this` binding of `func`.
+	 * @param {Array} args The arguments to invoke `func` with.
+	 * @returns {*} Returns the result of `func`.
+	 */
+	function apply(func, thisArg, args) {
+	  switch (args.length) {
+	    case 0: return func.call(thisArg);
+	    case 1: return func.call(thisArg, args[0]);
+	    case 2: return func.call(thisArg, args[0], args[1]);
+	    case 3: return func.call(thisArg, args[0], args[1], args[2]);
+	  }
+	  return func.apply(thisArg, args);
+	}
+
+	module.exports = apply;
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	/**
+	 * This method returns the first argument it receives.
+	 *
+	 * @static
+	 * @since 0.1.0
+	 * @memberOf _
+	 * @category Util
+	 * @param {*} value Any value.
+	 * @returns {*} Returns `value`.
+	 * @example
+	 *
+	 * var object = { 'a': 1 };
+	 *
+	 * console.log(_.identity(object) === object);
+	 * // => true
+	 */
+	function identity(value) {
+	  return value;
+	}
+
+	module.exports = identity;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	/**
+	 * This method returns `false`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.13.0
+	 * @category Util
+	 * @returns {boolean} Returns `false`.
+	 * @example
+	 *
+	 * _.times(2, _.stubFalse);
+	 * // => [false, false]
+	 */
+	function stubFalse() {
+	  return false;
+	}
+
+	module.exports = stubFalse;
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	/**
+	 * This function is like
+	 * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+	 * except that it includes inherited enumerable properties.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function nativeKeysIn(object) {
+	  var result = [];
+	  if (object != null) {
+	    for (var key in Object(object)) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = nativeKeysIn;
+
+
+/***/ },
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85,31 +575,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _isUndefined2 = __webpack_require__(2);
+	var _isUndefined2 = __webpack_require__(18);
 
 	var _isUndefined3 = _interopRequireDefault(_isUndefined2);
 
-	var _each2 = __webpack_require__(3);
+	var _each2 = __webpack_require__(19);
 
 	var _each3 = _interopRequireDefault(_each2);
 
-	var _result2 = __webpack_require__(4);
+	var _result2 = __webpack_require__(20);
 
 	var _result3 = _interopRequireDefault(_result2);
 
-	var _extend2 = __webpack_require__(16);
+	var _extend2 = __webpack_require__(1);
 
 	var _extend3 = _interopRequireDefault(_extend2);
 
-	var _bind2 = __webpack_require__(32);
+	var _bind2 = __webpack_require__(26);
 
 	var _bind3 = _interopRequireDefault(_bind2);
 
-	var _view = __webpack_require__(40);
+	var _view = __webpack_require__(34);
 
 	var _view2 = _interopRequireDefault(_view);
 
-	var _index = __webpack_require__(67);
+	var _index = __webpack_require__(63);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -227,7 +717,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 2 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -255,7 +745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 3 */
+/* 19 */
 /***/ function(module, exports) {
 
 	/**
@@ -283,12 +773,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 4 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var castPath = __webpack_require__(5),
-	    isFunction = __webpack_require__(12),
-	    toKey = __webpack_require__(15);
+	var castPath = __webpack_require__(21),
+	    isFunction = __webpack_require__(22),
+	    toKey = __webpack_require__(25);
 
 	/**
 	 * This method is like `_.get` except that if the resolved value is a
@@ -345,159 +835,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isArray = __webpack_require__(6),
-	    isKey = __webpack_require__(7),
-	    stringToPath = __webpack_require__(9),
-	    toString = __webpack_require__(11);
-
-	/**
-	 * Casts `value` to a path array if it's not one.
-	 *
-	 * @private
-	 * @param {*} value The value to inspect.
-	 * @param {Object} [object] The object to query keys on.
-	 * @returns {Array} Returns the cast property path array.
-	 */
-	function castPath(value, object) {
-	  if (isArray(value)) {
-	    return value;
-	  }
-	  return isKey(value, object) ? [value] : stringToPath(toString(value));
-	}
-
-	module.exports = castPath;
-
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is classified as an `Array` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an array, else `false`.
-	 * @example
-	 *
-	 * _.isArray([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isArray(document.body.children);
-	 * // => false
-	 *
-	 * _.isArray('abc');
-	 * // => false
-	 *
-	 * _.isArray(_.noop);
-	 * // => false
-	 */
-	var isArray = Array.isArray;
-
-	module.exports = isArray;
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isArray = __webpack_require__(6),
-	    isSymbol = __webpack_require__(8);
-
-	/** Used to match property names within property paths. */
-	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
-	    reIsPlainProp = /^\w*$/;
-
-	/**
-	 * Checks if `value` is a property name and not a property path.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {Object} [object] The object to query keys on.
-	 * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
-	 */
-	function isKey(value, object) {
-	  if (isArray(value)) {
-	    return false;
-	  }
-	  var type = typeof value;
-	  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
-	      value == null || isSymbol(value)) {
-	    return true;
-	  }
-	  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
-	    (object != null && value in Object(object));
-	}
-
-	module.exports = isKey;
-
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	/**
-	 * This method returns `false`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.13.0
-	 * @category Util
-	 * @returns {boolean} Returns `false`.
-	 * @example
-	 *
-	 * _.times(2, _.stubFalse);
-	 * // => [false, false]
-	 */
-	function stubFalse() {
-	  return false;
-	}
-
-	module.exports = stubFalse;
-
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var memoizeCapped = __webpack_require__(10);
-
-	/** Used to match property names within property paths. */
-	var reLeadingDot = /^\./,
-	    rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-
-	/** Used to match backslashes in property paths. */
-	var reEscapeChar = /\\(\\)?/g;
-
-	/**
-	 * Converts `string` to a property path array.
-	 *
-	 * @private
-	 * @param {string} string The string to convert.
-	 * @returns {Array} Returns the property path array.
-	 */
-	var stringToPath = memoizeCapped(function(string) {
-	  var result = [];
-	  if (reLeadingDot.test(string)) {
-	    result.push('');
-	  }
-	  string.replace(rePropName, function(match, number, quote, string) {
-	    result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
-	  });
-	  return result;
-	});
-
-	module.exports = stringToPath;
-
-
-/***/ },
-/* 10 */
+/* 21 */
 /***/ function(module, exports) {
 
 	/**
@@ -524,38 +862,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	/**
-	 * This method returns the first argument it receives.
-	 *
-	 * @static
-	 * @since 0.1.0
-	 * @memberOf _
-	 * @category Util
-	 * @param {*} value Any value.
-	 * @returns {*} Returns `value`.
-	 * @example
-	 *
-	 * var object = { 'a': 1 };
-	 *
-	 * console.log(_.identity(object) === object);
-	 * // => true
-	 */
-	function identity(value) {
-	  return value;
-	}
-
-	module.exports = identity;
-
-
-/***/ },
-/* 12 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(13),
-	    isObject = __webpack_require__(14);
+	var baseGetTag = __webpack_require__(23),
+	    isObject = __webpack_require__(24);
 
 	/** `Object#toString` result references. */
 	var asyncTag = '[object AsyncFunction]',
@@ -594,7 +905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -622,7 +933,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 14 */
+/* 24 */
 /***/ function(module, exports) {
 
 	/**
@@ -659,7 +970,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 25 */
 /***/ function(module, exports) {
 
 	/**
@@ -683,498 +994,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = identity;
-
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(17);
-
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var copyObject = __webpack_require__(18),
-	    createAssigner = __webpack_require__(24),
-	    keysIn = __webpack_require__(31);
-
-	/**
-	 * This method is like `_.assign` except that it iterates over own and
-	 * inherited source properties.
-	 *
-	 * **Note:** This method mutates `object`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @alias extend
-	 * @category Object
-	 * @param {Object} object The destination object.
-	 * @param {...Object} [sources] The source objects.
-	 * @returns {Object} Returns `object`.
-	 * @see _.assign
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 * }
-	 *
-	 * function Bar() {
-	 *   this.c = 3;
-	 * }
-	 *
-	 * Foo.prototype.b = 2;
-	 * Bar.prototype.d = 4;
-	 *
-	 * _.assignIn({ 'a': 0 }, new Foo, new Bar);
-	 * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
-	 */
-	var assignIn = createAssigner(function(object, source) {
-	  copyObject(source, keysIn(source), object);
-	});
-
-	module.exports = assignIn;
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var assignValue = __webpack_require__(19),
-	    baseAssignValue = __webpack_require__(20);
-
-	/**
-	 * Copies properties of `source` to `object`.
-	 *
-	 * @private
-	 * @param {Object} source The object to copy properties from.
-	 * @param {Array} props The property identifiers to copy.
-	 * @param {Object} [object={}] The object to copy properties to.
-	 * @param {Function} [customizer] The function to customize copied values.
-	 * @returns {Object} Returns `object`.
-	 */
-	function copyObject(source, props, object, customizer) {
-	  var isNew = !object;
-	  object || (object = {});
-
-	  var index = -1,
-	      length = props.length;
-
-	  while (++index < length) {
-	    var key = props[index];
-
-	    var newValue = customizer
-	      ? customizer(object[key], source[key], key, object, source)
-	      : undefined;
-
-	    if (newValue === undefined) {
-	      newValue = source[key];
-	    }
-	    if (isNew) {
-	      baseAssignValue(object, key, newValue);
-	    } else {
-	      assignValue(object, key, newValue);
-	    }
-	  }
-	  return object;
-	}
-
-	module.exports = copyObject;
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseAssignValue = __webpack_require__(20),
-	    eq = __webpack_require__(23);
-
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/**
-	 * Assigns `value` to `key` of `object` if the existing value is not equivalent
-	 * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-	 * for equality comparisons.
-	 *
-	 * @private
-	 * @param {Object} object The object to modify.
-	 * @param {string} key The key of the property to assign.
-	 * @param {*} value The value to assign.
-	 */
-	function assignValue(object, key, value) {
-	  var objValue = object[key];
-	  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
-	      (value === undefined && !(key in object))) {
-	    baseAssignValue(object, key, value);
-	  }
-	}
-
-	module.exports = assignValue;
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var defineProperty = __webpack_require__(21);
-
-	/**
-	 * The base implementation of `assignValue` and `assignMergeValue` without
-	 * value checks.
-	 *
-	 * @private
-	 * @param {Object} object The object to modify.
-	 * @param {string} key The key of the property to assign.
-	 * @param {*} value The value to assign.
-	 */
-	function baseAssignValue(object, key, value) {
-	  if (key == '__proto__' && defineProperty) {
-	    defineProperty(object, key, {
-	      'configurable': true,
-	      'enumerable': true,
-	      'value': value,
-	      'writable': true
-	    });
-	  } else {
-	    object[key] = value;
-	  }
-	}
-
-	module.exports = baseAssignValue;
-
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var getNative = __webpack_require__(22);
-
-	var defineProperty = (function() {
-	  try {
-	    var func = getNative(Object, 'defineProperty');
-	    func({}, '', {});
-	    return func;
-	  } catch (e) {}
-	}());
-
-	module.exports = defineProperty;
-
-
-/***/ },
-/* 22 */
-/***/ function(module, exports) {
-
-	/**
-	 * Gets the value at `key` of `object`.
-	 *
-	 * @private
-	 * @param {Object} [object] The object to query.
-	 * @param {string} key The key of the property to get.
-	 * @returns {*} Returns the property value.
-	 */
-	function getValue(object, key) {
-	  return object == null ? undefined : object[key];
-	}
-
-	module.exports = getValue;
-
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	/**
-	 * Performs a
-	 * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-	 * comparison between two values to determine if they are equivalent.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to compare.
-	 * @param {*} other The other value to compare.
-	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
-	 * @example
-	 *
-	 * var object = { 'a': 1 };
-	 * var other = { 'a': 1 };
-	 *
-	 * _.eq(object, object);
-	 * // => true
-	 *
-	 * _.eq(object, other);
-	 * // => false
-	 *
-	 * _.eq('a', 'a');
-	 * // => true
-	 *
-	 * _.eq('a', Object('a'));
-	 * // => false
-	 *
-	 * _.eq(NaN, NaN);
-	 * // => true
-	 */
-	function eq(value, other) {
-	  return value === other || (value !== value && other !== other);
-	}
-
-	module.exports = eq;
-
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseRest = __webpack_require__(25),
-	    isIterateeCall = __webpack_require__(30);
-
-	/**
-	 * Creates a function like `_.assign`.
-	 *
-	 * @private
-	 * @param {Function} assigner The function to assign values.
-	 * @returns {Function} Returns the new assigner function.
-	 */
-	function createAssigner(assigner) {
-	  return baseRest(function(object, sources) {
-	    var index = -1,
-	        length = sources.length,
-	        customizer = length > 1 ? sources[length - 1] : undefined,
-	        guard = length > 2 ? sources[2] : undefined;
-
-	    customizer = (assigner.length > 3 && typeof customizer == 'function')
-	      ? (length--, customizer)
-	      : undefined;
-
-	    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
-	      customizer = length < 3 ? undefined : customizer;
-	      length = 1;
-	    }
-	    object = Object(object);
-	    while (++index < length) {
-	      var source = sources[index];
-	      if (source) {
-	        assigner(object, source, index, customizer);
-	      }
-	    }
-	    return object;
-	  });
-	}
-
-	module.exports = createAssigner;
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var identity = __webpack_require__(26),
-	    overRest = __webpack_require__(27),
-	    setToString = __webpack_require__(29);
-
-	/**
-	 * The base implementation of `_.rest` which doesn't validate or coerce arguments.
-	 *
-	 * @private
-	 * @param {Function} func The function to apply a rest parameter to.
-	 * @param {number} [start=func.length-1] The start position of the rest parameter.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseRest(func, start) {
-	  return setToString(overRest(func, start, identity), func + '');
-	}
-
-	module.exports = baseRest;
 
 
 /***/ },
 /* 26 */
-/***/ function(module, exports) {
-
-	/**
-	 * This method returns the first argument it receives.
-	 *
-	 * @static
-	 * @since 0.1.0
-	 * @memberOf _
-	 * @category Util
-	 * @param {*} value Any value.
-	 * @returns {*} Returns `value`.
-	 * @example
-	 *
-	 * var object = { 'a': 1 };
-	 *
-	 * console.log(_.identity(object) === object);
-	 * // => true
-	 */
-	function identity(value) {
-	  return value;
-	}
-
-	module.exports = identity;
-
-
-/***/ },
-/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var apply = __webpack_require__(28);
-
-	/* Built-in method references for those with the same name as other `lodash` methods. */
-	var nativeMax = Math.max;
-
-	/**
-	 * A specialized version of `baseRest` which transforms the rest array.
-	 *
-	 * @private
-	 * @param {Function} func The function to apply a rest parameter to.
-	 * @param {number} [start=func.length-1] The start position of the rest parameter.
-	 * @param {Function} transform The rest array transform.
-	 * @returns {Function} Returns the new function.
-	 */
-	function overRest(func, start, transform) {
-	  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
-	  return function() {
-	    var args = arguments,
-	        index = -1,
-	        length = nativeMax(args.length - start, 0),
-	        array = Array(length);
-
-	    while (++index < length) {
-	      array[index] = args[start + index];
-	    }
-	    index = -1;
-	    var otherArgs = Array(start + 1);
-	    while (++index < start) {
-	      otherArgs[index] = args[index];
-	    }
-	    otherArgs[start] = transform(array);
-	    return apply(func, this, otherArgs);
-	  };
-	}
-
-	module.exports = overRest;
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
-
-	/**
-	 * A faster alternative to `Function#apply`, this function invokes `func`
-	 * with the `this` binding of `thisArg` and the arguments of `args`.
-	 *
-	 * @private
-	 * @param {Function} func The function to invoke.
-	 * @param {*} thisArg The `this` binding of `func`.
-	 * @param {Array} args The arguments to invoke `func` with.
-	 * @returns {*} Returns the result of `func`.
-	 */
-	function apply(func, thisArg, args) {
-	  switch (args.length) {
-	    case 0: return func.call(thisArg);
-	    case 1: return func.call(thisArg, args[0]);
-	    case 2: return func.call(thisArg, args[0], args[1]);
-	    case 3: return func.call(thisArg, args[0], args[1], args[2]);
-	  }
-	  return func.apply(thisArg, args);
-	}
-
-	module.exports = apply;
-
-
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	/**
-	 * This method returns the first argument it receives.
-	 *
-	 * @static
-	 * @since 0.1.0
-	 * @memberOf _
-	 * @category Util
-	 * @param {*} value Any value.
-	 * @returns {*} Returns `value`.
-	 * @example
-	 *
-	 * var object = { 'a': 1 };
-	 *
-	 * console.log(_.identity(object) === object);
-	 * // => true
-	 */
-	function identity(value) {
-	  return value;
-	}
-
-	module.exports = identity;
-
-
-/***/ },
-/* 30 */
-/***/ function(module, exports) {
-
-	/**
-	 * This method returns `false`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.13.0
-	 * @category Util
-	 * @returns {boolean} Returns `false`.
-	 * @example
-	 *
-	 * _.times(2, _.stubFalse);
-	 * // => [false, false]
-	 */
-	function stubFalse() {
-	  return false;
-	}
-
-	module.exports = stubFalse;
-
-
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
-
-	/**
-	 * This function is like
-	 * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
-	 * except that it includes inherited enumerable properties.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @returns {Array} Returns the array of property names.
-	 */
-	function nativeKeysIn(object) {
-	  var result = [];
-	  if (object != null) {
-	    for (var key in Object(object)) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	module.exports = nativeKeysIn;
-
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseRest = __webpack_require__(25),
-	    createWrap = __webpack_require__(33),
-	    getHolder = __webpack_require__(38),
-	    replaceHolders = __webpack_require__(39);
+	var baseRest = __webpack_require__(10),
+	    createWrap = __webpack_require__(27),
+	    getHolder = __webpack_require__(32),
+	    replaceHolders = __webpack_require__(33);
 
 	/** Used to compose bitmasks for function metadata. */
 	var WRAP_BIND_FLAG = 1,
@@ -1231,12 +1060,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var apply = __webpack_require__(28),
-	    createCtor = __webpack_require__(34),
-	    root = __webpack_require__(36);
+	var apply = __webpack_require__(13),
+	    createCtor = __webpack_require__(28),
+	    root = __webpack_require__(30);
 
 	/** Used to compose bitmasks for function metadata. */
 	var WRAP_BIND_FLAG = 1;
@@ -1280,11 +1109,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(35),
-	    isObject = __webpack_require__(14);
+	var baseCreate = __webpack_require__(29),
+	    isObject = __webpack_require__(24);
 
 	/**
 	 * Creates a function that produces an instance of `Ctor` regardless of
@@ -1323,10 +1152,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(14);
+	var isObject = __webpack_require__(24);
 
 	/** Built-in value references. */
 	var objectCreate = Object.create;
@@ -1359,10 +1188,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var freeGlobal = __webpack_require__(37);
+	var freeGlobal = __webpack_require__(31);
 
 	/** Detect free variable `self`. */
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -1374,7 +1203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 31 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -1385,7 +1214,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 38 */
+/* 32 */
 /***/ function(module, exports) {
 
 	/**
@@ -1408,7 +1237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 33 */
 /***/ function(module, exports) {
 
 	/**
@@ -1437,44 +1266,48 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _bind2 = __webpack_require__(32);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _bind2 = __webpack_require__(26);
 
 	var _bind3 = _interopRequireDefault(_bind2);
 
-	var _isFunction2 = __webpack_require__(12);
+	var _isFunction2 = __webpack_require__(22);
 
 	var _isFunction3 = _interopRequireDefault(_isFunction2);
 
-	var _result2 = __webpack_require__(4);
+	var _result2 = __webpack_require__(20);
 
 	var _result3 = _interopRequireDefault(_result2);
 
-	var _pick2 = __webpack_require__(41);
+	var _pick2 = __webpack_require__(35);
 
 	var _pick3 = _interopRequireDefault(_pick2);
 
-	var _extend2 = __webpack_require__(16);
+	var _extend2 = __webpack_require__(1);
 
 	var _extend3 = _interopRequireDefault(_extend2);
 
-	var _uniqueId2 = __webpack_require__(53);
+	var _uniqueId2 = __webpack_require__(48);
 
 	var _uniqueId3 = _interopRequireDefault(_uniqueId2);
 
-	var _events = __webpack_require__(54);
+	var _events = __webpack_require__(50);
 
 	var _events2 = _interopRequireDefault(_events);
 
-	var _extend4 = __webpack_require__(60);
+	var _extend4 = __webpack_require__(56);
 
 	var _extend5 = _interopRequireDefault(_extend4);
 
-	var _bb$ = __webpack_require__(65);
+	var _bb$ = __webpack_require__(61);
 
 	var _bb$2 = _interopRequireDefault(_bb$);
 
@@ -1576,15 +1409,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  extend: _extend5.default
-
 	});
 
+	exports.default = View;
+
 /***/ },
-/* 41 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var basePick = __webpack_require__(42),
-	    flatRest = __webpack_require__(52);
+	var basePick = __webpack_require__(36),
+	    flatRest = __webpack_require__(47);
 
 	/**
 	 * Creates an object composed of the picked `object` properties.
@@ -1611,11 +1445,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var basePickBy = __webpack_require__(43),
-	    hasIn = __webpack_require__(47);
+	var basePickBy = __webpack_require__(37),
+	    hasIn = __webpack_require__(41);
 
 	/**
 	 * The base implementation of `_.pick` without support for individual
@@ -1636,12 +1470,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 43 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(44),
-	    baseSet = __webpack_require__(45),
-	    castPath = __webpack_require__(5);
+	var baseGet = __webpack_require__(38),
+	    baseSet = __webpack_require__(39),
+	    castPath = __webpack_require__(21);
 
 	/**
 	 * The base implementation of  `_.pickBy` without support for iteratee shorthands.
@@ -1672,11 +1506,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 44 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var castPath = __webpack_require__(5),
-	    toKey = __webpack_require__(15);
+	var castPath = __webpack_require__(21),
+	    toKey = __webpack_require__(25);
 
 	/**
 	 * The base implementation of `_.get` without support for default values.
@@ -1702,14 +1536,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assignValue = __webpack_require__(19),
-	    castPath = __webpack_require__(5),
-	    isIndex = __webpack_require__(46),
-	    isObject = __webpack_require__(14),
-	    toKey = __webpack_require__(15);
+	var assignValue = __webpack_require__(4),
+	    castPath = __webpack_require__(21),
+	    isIndex = __webpack_require__(40),
+	    isObject = __webpack_require__(24),
+	    toKey = __webpack_require__(25);
 
 	/**
 	 * The base implementation of `_.set`.
@@ -1755,7 +1589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 46 */
+/* 40 */
 /***/ function(module, exports) {
 
 	/** Used as references for various `Number` constants. */
@@ -1783,11 +1617,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 47 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseHasIn = __webpack_require__(48),
-	    hasPath = __webpack_require__(49);
+	var baseHasIn = __webpack_require__(42),
+	    hasPath = __webpack_require__(43);
 
 	/**
 	 * Checks if `path` is a direct or inherited property of `object`.
@@ -1823,7 +1657,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -1842,15 +1676,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var castPath = __webpack_require__(5),
-	    isArguments = __webpack_require__(50),
-	    isArray = __webpack_require__(6),
-	    isIndex = __webpack_require__(46),
-	    isLength = __webpack_require__(51),
-	    toKey = __webpack_require__(15);
+	var castPath = __webpack_require__(21),
+	    isArguments = __webpack_require__(44),
+	    isArray = __webpack_require__(45),
+	    isIndex = __webpack_require__(40),
+	    isLength = __webpack_require__(46),
+	    toKey = __webpack_require__(25);
 
 	/**
 	 * Checks if `path` exists on `object`.
@@ -1887,7 +1721,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 44 */
 /***/ function(module, exports) {
 
 	/**
@@ -1911,7 +1745,39 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 45 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is classified as an `Array` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+	 * @example
+	 *
+	 * _.isArray([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArray(document.body.children);
+	 * // => false
+	 *
+	 * _.isArray('abc');
+	 * // => false
+	 *
+	 * _.isArray(_.noop);
+	 * // => false
+	 */
+	var isArray = Array.isArray;
+
+	module.exports = isArray;
+
+
+/***/ },
+/* 46 */
 /***/ function(module, exports) {
 
 	/** Used as references for various `Number` constants. */
@@ -1952,7 +1818,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 47 */
 /***/ function(module, exports) {
 
 	/**
@@ -1979,10 +1845,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 53 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toString = __webpack_require__(11);
+	var toString = __webpack_require__(49);
 
 	/** Used to generate unique IDs. */
 	var idCounter = 0;
@@ -2013,7 +1879,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 54 */
+/* 49 */
+/***/ function(module, exports) {
+
+	/**
+	 * This method returns the first argument it receives.
+	 *
+	 * @static
+	 * @since 0.1.0
+	 * @memberOf _
+	 * @category Util
+	 * @param {*} value Any value.
+	 * @returns {*} Returns `value`.
+	 * @example
+	 *
+	 * var object = { 'a': 1 };
+	 *
+	 * console.log(_.identity(object) === object);
+	 * // => true
+	 */
+	function identity(value) {
+	  return value;
+	}
+
+	module.exports = identity;
+
+
+/***/ },
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2022,19 +1915,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _bind2 = __webpack_require__(32);
+	var _bind2 = __webpack_require__(26);
 
 	var _bind3 = _interopRequireDefault(_bind2);
 
-	var _uniqueId2 = __webpack_require__(53);
+	var _uniqueId2 = __webpack_require__(48);
 
 	var _uniqueId3 = _interopRequireDefault(_uniqueId2);
 
-	var _once2 = __webpack_require__(55);
+	var _once2 = __webpack_require__(51);
 
 	var _once3 = _interopRequireDefault(_once2);
 
-	var _keys2 = __webpack_require__(58);
+	var _keys2 = __webpack_require__(54);
 
 	var _keys3 = _interopRequireDefault(_keys2);
 
@@ -2277,18 +2170,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      args[i] = arguments[i + 1];
 	    }eventsApi(triggerApi, this._events, name, void 0, args);
 	    return this;
-	  },
-
-	  bind: undefined.on,
-
-	  unbind: undefined.off
+	  }
 	};
 
 /***/ },
-/* 55 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var before = __webpack_require__(56);
+	var before = __webpack_require__(52);
 
 	/**
 	 * Creates a function that is restricted to invoking `func` once. Repeat calls
@@ -2316,10 +2205,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(57);
+	var toInteger = __webpack_require__(53);
 
 	/** Error message constants. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -2362,7 +2251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 53 */
 /***/ function(module, exports) {
 
 	/**
@@ -2389,10 +2278,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var overArg = __webpack_require__(59);
+	var overArg = __webpack_require__(55);
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeKeys = overArg(Object.keys, Object);
@@ -2401,7 +2290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 55 */
 /***/ function(module, exports) {
 
 	/**
@@ -2422,7 +2311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2431,15 +2320,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _create2 = __webpack_require__(61);
+	var _create2 = __webpack_require__(57);
 
 	var _create3 = _interopRequireDefault(_create2);
 
-	var _extend2 = __webpack_require__(16);
+	var _extend2 = __webpack_require__(1);
 
 	var _extend3 = _interopRequireDefault(_extend2);
 
-	var _has2 = __webpack_require__(63);
+	var _has2 = __webpack_require__(59);
 
 	var _has3 = _interopRequireDefault(_has2);
 
@@ -2470,11 +2359,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = extend;
 
 /***/ },
-/* 61 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseAssign = __webpack_require__(62),
-	    baseCreate = __webpack_require__(35);
+	var baseAssign = __webpack_require__(58),
+	    baseCreate = __webpack_require__(29);
 
 	/**
 	 * Creates an object that inherits from the `prototype` object. If a
@@ -2519,11 +2408,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var copyObject = __webpack_require__(18),
-	    keys = __webpack_require__(58);
+	var copyObject = __webpack_require__(3),
+	    keys = __webpack_require__(54);
 
 	/**
 	 * The base implementation of `_.assign` without support for multiple sources
@@ -2542,11 +2431,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 63 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseHas = __webpack_require__(64),
-	    hasPath = __webpack_require__(49);
+	var baseHas = __webpack_require__(60),
+	    hasPath = __webpack_require__(43);
 
 	/**
 	 * Checks if `path` is a direct property of `object`.
@@ -2583,7 +2472,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 64 */
+/* 60 */
 /***/ function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -2608,7 +2497,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 65 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2617,7 +2506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _jquery = __webpack_require__(66);
+	var _jquery = __webpack_require__(62);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -2626,13 +2515,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = _jquery2.default;
 
 /***/ },
-/* 66 */
+/* 62 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_66__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_62__;
 
 /***/ },
-/* 67 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2641,39 +2530,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _isArray2 = __webpack_require__(6);
+	var _isArray2 = __webpack_require__(45);
 
 	var _isArray3 = _interopRequireDefault(_isArray2);
 
-	var _isObject2 = __webpack_require__(14);
+	var _isObject2 = __webpack_require__(24);
 
 	var _isObject3 = _interopRequireDefault(_isObject2);
 
-	var _isString2 = __webpack_require__(68);
+	var _isString2 = __webpack_require__(64);
 
 	var _isString3 = _interopRequireDefault(_isString2);
 
-	var _each2 = __webpack_require__(3);
+	var _each2 = __webpack_require__(19);
 
 	var _each3 = _interopRequireDefault(_each2);
 
-	var _reduce2 = __webpack_require__(70);
+	var _reduce2 = __webpack_require__(66);
 
 	var _reduce3 = _interopRequireDefault(_reduce2);
 
-	var _isFunction2 = __webpack_require__(12);
+	var _isFunction2 = __webpack_require__(22);
 
 	var _isFunction3 = _interopRequireDefault(_isFunction2);
 
-	var _pick2 = __webpack_require__(41);
+	var _pick2 = __webpack_require__(35);
 
 	var _pick3 = _interopRequireDefault(_pick2);
 
-	var _extend2 = __webpack_require__(16);
+	var _extend2 = __webpack_require__(1);
 
 	var _extend3 = _interopRequireDefault(_extend2);
 
-	var _index = __webpack_require__(71);
+	var _index = __webpack_require__(67);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -2772,12 +2661,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 68 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(13),
-	    isArray = __webpack_require__(6),
-	    isObjectLike = __webpack_require__(69);
+	var baseGetTag = __webpack_require__(23),
+	    isArray = __webpack_require__(45),
+	    isObjectLike = __webpack_require__(65);
 
 	/** `Object#toString` result references. */
 	var stringTag = '[object String]';
@@ -2808,7 +2697,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 69 */
+/* 65 */
 /***/ function(module, exports) {
 
 	/**
@@ -2843,7 +2732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 70 */
+/* 66 */
 /***/ function(module, exports) {
 
 	/**
@@ -2875,7 +2764,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 71 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2884,23 +2773,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _extend2 = __webpack_require__(16);
+	var _extend2 = __webpack_require__(1);
 
 	var _extend3 = _interopRequireDefault(_extend2);
 
-	var _events = __webpack_require__(54);
+	var _events = __webpack_require__(50);
 
 	var _events2 = _interopRequireDefault(_events);
 
-	var _extend4 = __webpack_require__(60);
+	var _extend4 = __webpack_require__(56);
 
 	var _extend5 = _interopRequireDefault(_extend4);
 
-	var _view = __webpack_require__(40);
+	var _view = __webpack_require__(34);
 
 	var _view2 = _interopRequireDefault(_view);
 
-	var _bb$ = __webpack_require__(65);
+	var _bb$ = __webpack_require__(61);
 
 	var _bb$2 = _interopRequireDefault(_bb$);
 
