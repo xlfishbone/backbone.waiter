@@ -1,11 +1,11 @@
-import bbView from '../bb/view'
+import bb from '../bb/index'
 import Mn from './index'
 import _ from 'lodash'
 
 // Mn.BaseView
 // -------------------
 
-export default bbView.extend({
+let mnView = bb.View.extend({
   isDestroyed: false,
 
   constructor: function (options) {
@@ -19,7 +19,7 @@ export default bbView.extend({
     // at some point however this may be removed
     this.options = _.extend({}, _.result(this, 'options'), options)
 
-    bbView.call(this, this.options)
+    bb.View.call(this, this.options)
   },
 
   // normalize the keys of passed hash with the views `ui` selectors.
@@ -106,7 +106,7 @@ export default bbView.extend({
     const combinedEvents = {}
     _.extend(combinedEvents, events)
 
-    bbView.prototype.delegateEvents.call(this, combinedEvents)
+    bb.View.prototype.delegateEvents.call(this, combinedEvents)
   },
 
   destroy: function () {
@@ -141,3 +141,5 @@ export default bbView.extend({
   }
 
 })
+
+export default mnView

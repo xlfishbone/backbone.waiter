@@ -18,4 +18,4 @@ var appView = (function() {
       alert('You clicked me');
     }
   });
-}());
+})();

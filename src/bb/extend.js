@@ -3,7 +3,7 @@ import _ from 'lodash'
 // Helper function to correctly set up the prototype chain for subclasses.
 // Similar to `goog.inherits`, but uses a hash of prototype properties and
 // class properties to be extended.
-const extend = function (protoProps, staticProps) {
+export default function (protoProps, staticProps) {
   const parent = this
   let child
 
@@ -30,5 +30,3 @@ const extend = function (protoProps, staticProps) {
 
   return child
 }
-
-export default extend

@@ -162,9 +162,9 @@ _.extend(View.prototype, Events, {
   // subclasses using an alternative DOM manipulation API.
   _setAttributes: function (attributes) {
     this.$el.attr(attributes)
-  },
-
-  extend: bbExtend
+  }
 })
+
+View.extend = bbExtend
 
 export default View

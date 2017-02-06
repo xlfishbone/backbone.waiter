@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\bb\view.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/bb/</a> view.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.62% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>5/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">10.87% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>5/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Backbone.View
+// -------------
+&nbsp;
+// Backbone Views are almost more convention than they are actual code. A View
+// is simply a JavaScript object that represents a logical chunk of UI in the
+// DOM. This might be a single item, an entire list, a sidebar or panel, or
+// even the surrounding frame which wraps your whole app. Defining a chunk of
+// UI as a **View** allows you to define your DOM events declaratively, without
+// having to worry about render order ... and makes it easy for the view to
+// react to specific changes in the state of your models.
+&nbsp;
+import _ from 'lodash'
+import Events from './events'
+import bbExtend from './extend'
+import bb$ from './bb$'
+&nbsp;
+// Creating a Backbone.View creates its initial element outside of the DOM,
+// if an existing element is not provided...
+const View = function (options) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  this.cid = _.uniqueId('view')</span>
+<span class="cstat-no" title="statement not covered" >  _.extend(this, _.pick(options, viewOptions))</span>
+<span class="cstat-no" title="statement not covered" >  this._ensureElement()</span>
+<span class="cstat-no" title="statement not covered" >  this.initialize.apply(this, arguments)</span>
+}
+&nbsp;
+// Cached regex to split keys for `delegate`.
+const delegateEventSplitter = /^(\S+)\s*(.*)$/
+&nbsp;
+// List of view options to be set as properties.
+const viewOptions = ['el', 'id', 'attributes', 'className', 'tagName', 'events']
+&nbsp;
+// Set up all inheritable **Backbone.View** properties and methods.
+_.extend(View.prototype, Events, {
+&nbsp;
+  // The default `tagName` of a View's element is `"div"`.
+  tagName: 'div',
+&nbsp;
+  // jQuery delegate for element lookup, scoped to DOM elements within the
+  // current view. This should be preferred to global lookups where possible.
+  $: function (selector) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return this.$el.find(selector)</span>
+  },
+&nbsp;
+  // Initialize is an empty function by default. Override it with your own
+  // initialization logic.
+  initialize: function () <span class="fstat-no" title="function not covered" >{},</span>
+&nbsp;
+  // **render** is the core function that your view should override, in order
+  // to populate its element (`this.el`), with the appropriate HTML. The
+  // convention is for **render** to always return `this`.
+  render: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  },
+&nbsp;
+  // Remove this view by taking the element out of the DOM, and removing any
+  // applicable Backbone.Events listeners.
+  remove: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this._removeElement()</span>
+<span class="cstat-no" title="statement not covered" >    this.stopListening()</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  },
+&nbsp;
+  // Remove this view's element from the document and all event listeners
+  // attached to it. Exposed for subclasses using an alternative DOM
+  // manipulation API.
+  _removeElement: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.$el.remove()</span>
+  },
+&nbsp;
+  // Change the view's element (`this.el` property) and re-delegate the
+  // view's events on the new element.
+  setElement: function (element) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.undelegateEvents()</span>
+<span class="cstat-no" title="statement not covered" >    this._setElement(element)</span>
+<span class="cstat-no" title="statement not covered" >    this.delegateEvents()</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  },
+&nbsp;
+  // Creates the `this.el` and `this.$el` references for this view using the
+  // given `el`. `el` can be a CSS selector or an HTML string, a jQuery
+  // context or an element. Subclasses can override this to utilize an
+  // alternative DOM manipulation API and are only required to set the
+  // `this.el` property.
+  _setElement: function (el) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.$el = el instanceof bb$ ? el : bb$(el)</span>
+<span class="cstat-no" title="statement not covered" >    this.el = this.$el[0]</span>
+  },
+&nbsp;
+  // Set callbacks, where `this.events` is a hash of
+  //
+  // *{"event selector": "callback"}*
+  //
+  //     {
+  //       'mousedown .title':  'edit',
+  //       'click .button':     'save',
+  //       'click .open':       function(e) { ... }
+  //     }
+  //
+  // pairs. Callbacks will be bound to the view, with `this` set properly.
+  // Uses event delegation for efficiency.
+  // Omitting the selector binds the event to `this.el`.
+  delegateEvents: function (events) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    events || (events = _.result(this, 'events'))</span>
+<span class="cstat-no" title="statement not covered" >    if (!events) <span class="cstat-no" title="statement not covered" >return this</span></span>
+<span class="cstat-no" title="statement not covered" >    this.undelegateEvents()</span>
+<span class="cstat-no" title="statement not covered" >    for (const key in events) {</span>
+      let method = <span class="cstat-no" title="statement not covered" >events[key]</span>
+<span class="cstat-no" title="statement not covered" >      if (!_.isFunction(method)) <span class="cstat-no" title="statement not covered" >method = this[method]</span></span>
+<span class="cstat-no" title="statement not covered" >      if (!method) <span class="cstat-no" title="statement not covered" >continue</span></span>
+      const match = <span class="cstat-no" title="statement not covered" >key.match(delegateEventSplitter)</span>
+<span class="cstat-no" title="statement not covered" >      this.delegate(match[1], match[2], _.bind(method, this))</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  },
+&nbsp;
+  // Add a single event listener to the view's element (or a child element
+  // using `selector`). This only works for delegate-able events: not `focus`,
+  // `blur`, and not `change`, `submit`, and `reset` in Internet Explorer.
+  delegate: function (eventName, selector, listener) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.$el.on(eventName + '.delegateEvents' + this.cid, selector, listener)</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  },
+&nbsp;
+  // Clears all callbacks previously bound to the view by `delegateEvents`.
+  // You usually don't need to use this, but may wish to if you have multiple
+  // Backbone views attached to the same DOM element.
+  undelegateEvents: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (this.$el) <span class="cstat-no" title="statement not covered" >this.$el.off('.delegateEvents' + this.cid)</span></span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  },
+&nbsp;
+  // A finer-grained `undelegateEvents` for removing a single delegated event.
+  // `selector` and `listener` are both optional.
+  undelegate: function (eventName, selector, listener) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.$el.off(eventName + '.delegateEvents' + this.cid, selector, listener)</span>
+<span class="cstat-no" title="statement not covered" >    return this</span>
+  },
+&nbsp;
+  // Produces a DOM element to be assigned to your view. Exposed for
+  // subclasses using an alternative DOM manipulation API.
+  _createElement: function (tagName) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return document.createElement(tagName)</span>
+  },
+&nbsp;
+  // Ensure that the View has a DOM element to render into.
+  // If `this.el` is a string, pass it through `$()`, take the first
+  // matching element, and re-assign it to `el`. Otherwise, create
+  // an element from the `id`, `className` and `tagName` properties.
+  _ensureElement: function () <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.el) {</span>
+      const attrs = <span class="cstat-no" title="statement not covered" >_.extend({}, _.result(this, 'attributes'))</span>
+<span class="cstat-no" title="statement not covered" >      if (this.id) <span class="cstat-no" title="statement not covered" >attrs.id = _.result(this, 'id')</span></span>
+<span class="cstat-no" title="statement not covered" >      if (this.className) <span class="cstat-no" title="statement not covered" >attrs['class'] = _.result(this, 'className')</span></span>
+<span class="cstat-no" title="statement not covered" >      this.setElement(this._createElement(_.result(this, 'tagName')))</span>
+<span class="cstat-no" title="statement not covered" >      this._setAttributes(attrs)</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.setElement(_.result(this, 'el'))</span>
+    }
+  },
+&nbsp;
+  // Set attributes from a hash on this view's element.  Exposed for
+  // subclasses using an alternative DOM manipulation API.
+  _setAttributes: function (attributes) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    this.$el.attr(attributes)</span>
+  }
+})
+&nbsp;
+View.extend = bbExtend
+&nbsp;
+export default View
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 06 2017 00:41:07 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
