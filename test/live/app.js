@@ -1,8 +1,9 @@
-var appView = (function() {
+/* es-lint-ignore-all */
+var app = (function () {
   'use strict';
-  
-  return Waiter.View.extend({
-    el:'#app',
+
+  var _appView = Waiter.View.extend({
+    el: '#app',
     ui: {
       txtInput: '#txtInput',
       btnSave: '#btnSave'
@@ -15,7 +16,25 @@ var appView = (function() {
     },
     onSaveClick: function (evt) {
       evt.preventDefault();
-      alert('You clicked me');
+      this.trigger('txtChange', this.ui.txtInput.val());
     }
   });
+
+  var _appView2 = Waiter.View.extend({
+    el: '#app2',
+    initialize: function () {
+      this.listenTo(_appView, "txtChange", 'onTxtChange');
+    },
+    ui: {
+      txt2: '#txt2'
+    },
+    onTxtChange: function (txt) {
+      this.ui.txt2.val(txt);
+    }
+  });
+
+  return {
+    appView: _appView,
+    appView2: _appView2
+  }
 })();

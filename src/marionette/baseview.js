@@ -1,6 +1,6 @@
 import bb from '../bb/index'
 import Mn from './index'
-import _ from 'lodash'
+import _ from 'lodash/core'
 
 // Mn.BaseView
 // -------------------
@@ -61,9 +61,10 @@ let mnView = bb.View.extend({
     this.ui = {}
 
     // bind each of the selectors
+    var self = this
     _.each(bindings, function (selector, key) {
-      this.ui[key] = this.$(selector)
-    }, this)
+      self.ui[key] = self.$(selector)
+    })
   },
 
   // This method unbinds the elements specified in the "ui" hash
@@ -77,9 +78,10 @@ let mnView = bb.View.extend({
     }
 
     // delete all of the existing ui bindings
+    var self = this
     _.each(this.ui, function ($el, name) {
-      delete this.ui[name]
-    }, this)
+      delete self.ui[name]
+    })
 
     // reset the ui element to the original bindings configuration
     this.ui = this._uiBindings

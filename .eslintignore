@@ -3,3 +3,4 @@ config/*.js
 webpack.config.js
 tmp/*
 test/unit/coverage/*
+test/live/*

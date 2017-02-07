@@ -9,7 +9,7 @@
 // having to worry about render order ... and makes it easy for the view to
 // react to specific changes in the state of your models.
 
-import _ from 'lodash'
+import _ from 'lodash/core'
 import Events from './events'
 import bbExtend from './extend'
 import bb$ from './bb$'

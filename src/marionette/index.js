@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash/core'
 import Backbone from '../bb/index'
 
 // Helpers
@@ -64,15 +64,16 @@ const _getValue = function (value, context, params) {
 // Pass in a mapping of events => functions or function names
 // and return a mapping of events => functions
 const normalizeMethods = function (hash) {
+  var self = this
   return _.reduce(hash, function (normalizedHash, method, name) {
     if (!_.isFunction(method)) {
-      method = this[method]
+      method = self[method]
     }
     if (method) {
       normalizedHash[name] = method
     }
     return normalizedHash
-  }, {}, this)
+  }, {})
 }
 
 // utility method for parsing @ui. syntax strings

@@ -26,14 +26,24 @@
         </form>
       </div>
     </div>
-
+  </div>
+  <div id="app2" class="well">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <input type="text" id="txt2" class="form-control">
+        </div>
+      </div>
+    </div>
   </div>
   <!-- built files will be auto injected -->
   <script type="text/javascript" src="../../_dist/backbone.waiter.js"></script>
   <script type="text/javascript" src="app.js"></script>
   <script>
-    var _a = new appView();
+    var _a = new app.appView();
+    var _b = new app.appView2();
     _a.render();
+    _b.render();
   </script>
 
 </html>

@@ -3,8 +3,14 @@ import {View} from '../../../src/main'
 
 describe('Waiter View', () => {
   it('should be able to extend', () => {
-    var vw = View.extend({})
+    const Vw = View.extend({
+      ui: {
+        test: 'test'
+      }
+    })
+    const actual = new Vw()
 
-    expect(vw).to.be.an.object
+    expect(Vw).to.be.an.object
+    expect(actual.ui['test']).to.be.equal('test')
   })
 })

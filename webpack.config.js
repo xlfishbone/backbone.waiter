@@ -57,7 +57,7 @@ module.exports = {
       inject: false,
     }),
     new FriendlyErrors(),
-    new LodashModuleReplacementPlugin,    
+    new webpack.optimize.OccurrenceOrderPlugin 
   ],
   eslint: {
     formatter: require('eslint-friendly-formatter'),
