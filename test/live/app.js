@@ -22,8 +22,8 @@ var app = (function () {
 
   var _appView2 = Waiter.View.extend({
     el: '#app2',
-    initialize: function () {
-      this.listenTo(_appView, "txtChange", 'onTxtChange');
+    initialize: function (props) {
+      this.listenTo(props.view1, "txtChange", 'onTxtChange');
     },
     ui: {
       txt2: '#txt2'
