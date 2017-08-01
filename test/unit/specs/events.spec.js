@@ -35,4 +35,15 @@ describe('backbone events', () => {
     obj.trigger('a b c')
     expect(obj.counter).to.equal(5)
   })
+
+  it('can listen to other events', () => {
+    let obj1 = {counter: 0}
+    let obj2 = {}
+    _.extend(obj1, events)
+    _.extend(obj2, events)
+
+    obj1.listenTo(obj2, 'add', () => { obj1.counter += 1 })
+    obj2.trigger('add')
+    expect(obj1.counter).to.be.equal(1)
+  })
 })

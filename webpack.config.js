@@ -28,27 +28,29 @@ module.exports = {
     contentBase: path.resolve(__dirname, './test/live/index.html'),
   },
   module: {
-    preLoaders: [{
-      test: /\.js$/,
-      loader: 'eslint',
-      include: [
-        path.join(__dirname, './src'),
-      ],
-      exclude: /node_modules/,
-    }, ],
-    loaders: [{
-      test: /\.js$/,
-      loader: 'babel',
-      include: [
-        path.join(__dirname, './src'),
-      ],
-      query:{
-        plugins:[
-          "lodash"
-        ]
+    rules: [{
+        test: /\.js$/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+        include: [
+          path.join(__dirname, './src'),
+        ],
+        exclude: /node_modules/,
       },
-      exclude: /node_modules/,
-    }, ],
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [
+          path.join(__dirname, './src'),
+        ],
+        options: {
+          plugins: [
+            "lodash"
+          ]
+        },
+        exclude: /node_modules/,
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -57,10 +59,7 @@ module.exports = {
       inject: false,
     }),
     new FriendlyErrors(),
-    new webpack.optimize.OccurrenceOrderPlugin 
-  ],
-  eslint: {
-    formatter: require('eslint-friendly-formatter'),
-  },
+    new LodashModuleReplacementPlugin(),
+  ]
   // devtool: '#eval-source-map',
 };

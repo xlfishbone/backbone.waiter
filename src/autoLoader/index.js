@@ -1,12 +1,34 @@
+import $ from '../bb/bb$'
 
-// let viewList = []
+let viewList = []
 
-// function registerView (views) {
+function loadViewByEl () {
+  viewList.forEach((View) => {
+    const el = View.el
 
-// }
+    if ($(el).length > 0) {
+      // el found in dom
+      // initialize the view
+      const _myView = new View()
 
-// function loadViewByEl () {
+      // hook up ui and events
+      _myView.render()
+    }
+  }, this)
+}
 
-// }
+export default {
+  registerViews (views) {
+    // hold our views
 
-// document.addEventListener('ready', loadViewByEl)
+    viewList.push(...views)
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+      loadViewByEl()
+    })
+
+    $(function () {
+      loadViewByEl()
+    })
+  }
+}

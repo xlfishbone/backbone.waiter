@@ -25,7 +25,7 @@ const webpackConfig = merge(baseConfig, {
 delete webpackConfig.entry
 
 // Use babel for test files too
-webpackConfig.module.loaders.some(function (loader, i) {
+webpackConfig.module.rules.some(function (loader, i) {
   if (/^babel(-loader)?$/.test(loader.loader)) {
     loader.include.push(path.resolve(projectRoot, 'test/unit'))
     return true
