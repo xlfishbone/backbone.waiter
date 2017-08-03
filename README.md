@@ -2,18 +2,18 @@
 
 
 # backbone.waiter
-tiny library (**1KB gziped**) to add backbone structure and a marionette feel to
+tiny library (**3KB gziped**) to add backbone structure and a marionette feel to
 your server side views.
 
 ## Purpose
 I really like the structure backbone gives and the marionette give the JS code for your views.
 This library is to help give that structure to views that are rendered server side.
-via .NET, PHP, or whatever server language you are using.
+via .NET, PHP, Python or whatever server language you are using.
 
 ## Inspiration
-Most of the base code was borrowed from [backbone.marionette](https://github.com/marionettejs/backbone.marionette) v2.4.
-The only reason this exist and not just use all of Marionette is for a special use case.
-Where I wanted the JS code to be as small as possible and I didn't need all the other goodness Mn provides.
+Pretty much all of the base code was borrowed from [Backbone](http://backbonejs.org/) v1.3.4 and [backbone.marionette](https://github.com/marionettejs/backbone.marionette) v2.4.
+The only reason this exist and not just use all of Backbone and Marionette is for a special use case.
+Where I wanted the JS code to be as small as possible and I didn't need all the other goodness that Backbone and Marionette provide.
 
 So I just cherry picked the smallest amount of code I could to get what I wanted.
 A single base view with the ui hash.
@@ -24,13 +24,13 @@ only and directly with server side views. If you need more of what Marionette pr
 should use the real thing.
 
 ## Dependencies
+Note* there is no depency on Backbone as it has been forked and stripped down. However we still need the original depencies for Backbone in order for it all to work.
 1. jQuery
 2. underscore / lodash
-3. backbone
 
 ## BaseView
 ```javascript
-var MyView = backbone.waiter.BaseView.extend({
+var MyView = Waiter.View.extend({
 	el: '.mainView', //where the view starts
 
 	initialize: function(){

@@ -3,12 +3,15 @@
   "version": "0.2.0",
   "description": "fork of backbone with a splash of backbone.marionette for server side views",
   "main": "src/index.js",
+  "files": [
+    "_dist/",
+    "src/"
+  ],
   "scripts": {
     "test": "cross-env BABEL_ENV='test' karma start test/unit/karma.conf.js",
     "unit": "cross-env BABEL_ENV='test' karma start test/unit/karma.conf.js --single-run",
     "babel": "babel --presets es2015 src/index.js -o dist/backbone.waiter.js",
     "build": "webpack",
-    "release": "webpack -p",
     "lint": "eslint --fix src test/unit/",
     "devServer": "webpack-dev-server"
   },
