@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { View } from '../../../src/main'
-// import jquery from 'jquery'
+import $ from 'jquery'
+import _ from 'lodash'
 
 describe('Waiter View', () => {
   beforeEach(function () {

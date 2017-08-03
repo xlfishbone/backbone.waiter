@@ -1,6 +1,6 @@
 import bb from '../bb/index'
 import Mn from './index'
-import _ from 'lodash/core'
+import _ from 'lodash'
 
 // Mn.BaseView
 // -------------------

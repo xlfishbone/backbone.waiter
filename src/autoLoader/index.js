@@ -4,14 +4,9 @@ let viewList = []
 
 function loadViewByEl () {
   viewList.forEach((View) => {
-    const el = View.el
+    const _myView = new View()
 
-    if ($(el).length > 0) {
-      // el found in dom
-      // initialize the view
-      const _myView = new View()
-
-      // hook up ui and events
+    if ($(_myView.el).length > 0) {
       _myView.render()
     }
   }, this)
@@ -20,12 +15,7 @@ function loadViewByEl () {
 export default {
   registerViews (views) {
     // hold our views
-
     viewList.push(...views)
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-      loadViewByEl()
-    })
 
     $(function () {
       loadViewByEl()

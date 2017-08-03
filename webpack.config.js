@@ -8,11 +8,12 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    app: './main.js',
+    'backbone.waiter': './main.js',
+    'backbone.waiter.min': './main.js'
   },
   output: {
     path: path.resolve(__dirname, './_dist'),
-    filename: 'backbone.waiter.js',
+    filename: '[name].js',
     //publicPath: '/assets',
     library: 'Waiter',
     libraryTarget: 'umd',
@@ -21,8 +22,8 @@ module.exports = {
   externals: {
     // require("jquery") is external and available
     //  on the global var jQuery
-    "jquery": "$"
-    // "lodash": "_"
+    "jquery": "$",
+    "lodash": "_"
   },
   devServer: {
     contentBase: path.resolve(__dirname, './test/live/index.html'),
@@ -45,13 +46,14 @@ module.exports = {
         ],
         options: {
           plugins: [
-            "lodash"
+            // "lodash"
           ]
         },
         exclude: /node_modules/,
       },
     ],
   },
+  devtool: "source-map",
   plugins: [
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, './test/live/index.html'),
@@ -59,7 +61,15 @@ module.exports = {
       inject: false,
     }),
     new FriendlyErrors(),
-    new LodashModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      '_': 'lodash'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      minimize: true
+    })
+    // new LodashModuleReplacementPlugin(),
   ]
   // devtool: '#eval-source-map',
 };

@@ -1,4 +1,4 @@
-import _ from 'lodash/core'
+import _ from 'lodash'
 import Backbone from '../bb/index'
 
 // Helpers

@@ -12,7 +12,7 @@
 //     object.trigger('expand');
 //
 
-import _ from 'lodash/core'
+import _ from 'lodash'
 
 // Regular expression used to split event strings.
 const eventSplitter = /\s+/

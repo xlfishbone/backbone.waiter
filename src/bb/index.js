@@ -4,7 +4,7 @@
 import bbEvents from './events'
 import bbExtend from './extend'
 import bbView from './view'
-import _ from 'lodash/core'
+import _ from 'lodash'
 import bb$ from './bb$'
 
 const BB = {
