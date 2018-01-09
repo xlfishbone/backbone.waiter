@@ -1,0 +1,29 @@
+{
+  "name": "backbone.waiter",
+  "main": "backbone.waiter.min.js",
+  "dependencies": {
+    "backbone": "^1.3",
+    "underscore": "^1.8",
+    "jquery": "^3"
+  },
+  "homepage": "https://github.com/xlfishbone/backbone.waiter",
+  "authors": [
+    "Joshua Allen <beefzilla@gmail.com>"
+  ],
+  "description": "tiny library to add backbone structure and a marionette feel to your server side views.",
+  "keywords": [
+    "backbone",
+    "waiter",
+    "server",
+    "side",
+    "marionette"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
