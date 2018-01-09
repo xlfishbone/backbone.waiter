@@ -6,7 +6,16 @@
     "underscore": "^1.8",
     "jquery": "^3"
   },
-  "homepage": "https://github.com/xlfishbone/backbone.waiter",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "homepage": "https://github.com/xlfishbone/backbone.waiter/tree/v1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xlfishbone/backbone.waiter.git#v1"
+  },
   "authors": [
     "Joshua Allen <beefzilla@gmail.com>"
   ],
