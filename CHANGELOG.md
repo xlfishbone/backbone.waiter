@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Rollup support
 - Multiple dist packages
 - Added some basic testing with Jest
+- Added publish.cmd
 ### Changed
 - moved to es6 modules
 ### Removed
