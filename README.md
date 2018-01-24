@@ -23,44 +23,77 @@ Unlike Marionette there is no automatic event binding to backbone models or supp
 
 ## BaseView
 ```javascript	
-var MyView = backbone.waiter.BaseView.extend({
-	el: '.mainView', //where the view starts 
+var MyView = Backbone.Waiter.BaseView.extend({
+	el: '.mainView', // where the view starts 
 
 	initialize: function(){
-		//called when view is instantiated
-		//the ui hash and events are not ready yet
+		// called when view is instantiated
+		// the ui hash and events are not ready yet
 	},	
 	
+	// jQuery selectors stored in a hash
 	ui: {
+		// prop: selector
 		btnSubmit: '#btnSubmit'
-	},
-	
+	},	
+		
 	events:{
+		// event selector/@ui.prop: function
 		'click @ui.btnSubmit': 'onbtnSubmit'
 	},
 
-	onbtnSubmit: function(){
+	onbtnSubmit: function(e){
 		e.preventDefault();
 		alert('I got clicked');
 	},
 
 	onRender: function(){
-		//the Dom is ready you can now use the ui hash
+		// the Dom is ready you can now use the ui hash
 	}
-
-
 });
 
+
+```
+
+## Render the view
+To get the view to hook up events and initialize ```render()``` needs to be called. 
+
+This can be done anywhere you want on the page itself or as part of the view code.
+
+```javascript
 $(function(){
 	if($('.mainView').length > 0) {
 		// initialize the view
 		var _myView = new MyView(); 
-		
-		//hook up ui and events
+
+		// hook up ui and events
 		_myView.render();
 	}
-
 });
+```
+
+## AutoLoader
+To assist in bundling code the autoloader can also be used to test what views should be loaded when the page renders. 
+
+It simply checks your ```el``` against the dom and if its found initializes the view and renders it.  
+
+```javascript
+// import/require  the views
+var FooView = require('./views/FooView')
+var BarView = require('./views/BarView ')
+
+// create view array to store them
+var viewArray = [
+  FooView,
+  BarView
+]
+
+// loop throuch each view 
+$(function () {
+  for (var i = 0; i < viewArray.length; i++) {
+    Waiter.AutoLoader(viewArray[i])
+  }
+})
 
 ```
 
