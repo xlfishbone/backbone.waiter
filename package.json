@@ -1,6 +1,6 @@
 {
   "name": "backbone.waiter",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "tiny library to add backbone structure and a marionette feel to your server side views",
   "repository": {
     "type": "git",
@@ -45,7 +45,6 @@
     "watch": "rollup -c -w"
   },
   "files": [
-    "backbone.waiter.js",
-    "backbone.waiter.min.js"
+    "./dist"    
   ]
 }
