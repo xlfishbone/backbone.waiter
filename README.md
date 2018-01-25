@@ -1,7 +1,7 @@
+# backbone.waiter 
+[![npm version](https://badge.fury.io/js/backbone.waiter.svg)](https://badge.fury.io/js/backbone.waiter) 
+[![Build Status](https://travis-ci.org/xlfishbone/backbone.waiter.svg)](https://travis-ci.org/xlfishbone/backbone.waiter)
 
-
-
-# backbone.waiter
 tiny library (**1KB gziped**) to add backbone structure and a marionette feel to your server side views.
 
 ## Purpose
@@ -21,7 +21,31 @@ Unlike Marionette there is no automatic event binding to backbone models or supp
 2. underscore / lodash
 3. backbone
 
-## BaseView
+## Installation
+**npm**
+- ```npm install backbone.waiter --save-dev```
+
+**bower**
+- ```bower install backbone.waiter ```
+
+**jspm**
+- ```jspm install npm:backbone.waiter ```
+
+## Dist Files
+There are two main packages 
+
+* ```backbone.waiter.js``` 
+	* The default package
+	* Only the core code
+* ```backbone.waiter.bundle.js``` 
+	* Bundled version
+		* includeds Backbone and Underscore
+	* **Does not include jQuery** 
+		* this is to let you pick your own version of jQuery should work with any version Backbone will work with. 
+
+
+## Usage
+### BaseView
 ```javascript	
 var MyView = Backbone.Waiter.BaseView.extend({
 	el: '.mainView', // where the view starts 
@@ -55,7 +79,7 @@ var MyView = Backbone.Waiter.BaseView.extend({
 
 ```
 
-## Render the view
+### Render the view
 To get the view to hook up events and initialize ```render()``` needs to be called. 
 
 This can be done anywhere you want on the page itself or as part of the view code.
@@ -72,7 +96,7 @@ $(function(){
 });
 ```
 
-## AutoLoader
+### AutoLoader
 To assist in bundling code the autoloader can also be used to test what views should be loaded when the page renders. 
 
 It simply checks your ```el``` against the dom and if its found initializes the view and renders it.  
@@ -97,5 +121,8 @@ $(function () {
 
 ```
 
-## License
+## [Changelog](CHANGELOG.md)
+Updates and changes between versions will be kept here.
+
+## [License](LICENSE)
 **MIT**
