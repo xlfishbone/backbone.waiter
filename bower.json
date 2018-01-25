@@ -11,10 +11,10 @@
     "globals",
     "node"
   ],
-  "homepage": "https://github.com/xlfishbone/backbone.waiter/tree/v2",
+  "homepage": "https://github.com/xlfishbone/backbone.waiter",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xlfishbone/backbone.waiter.git#v2"
+    "url": "https://github.com/xlfishbone/backbone.waiter.git"
   },
   "authors": [
     "Joshua Allen <beefzilla@gmail.com>"
