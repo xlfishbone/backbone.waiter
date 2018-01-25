@@ -1,7 +1,10 @@
 
 
 
-# backbone.waiter
+# backbone.waiter 
+[![npm version](https://badge.fury.io/js/backbone.waiter.svg)](https://badge.fury.io/js/backbone.waiter) 
+[![Build Status](https://travis-ci.org/xlfishbone/backbone.waiter.svg?branch=v2)](https://travis-ci.org/xlfishbone/backbone.waiter)
+
 tiny library (**1KB gziped**) to add backbone structure and a marionette feel to your server side views.
 
 ## Purpose
