@@ -21,6 +21,16 @@ Unlike Marionette there is no automatic event binding to backbone models or supp
 2. underscore / lodash
 3. backbone
 
+## Installation
+**npm**
+- ```npm install backbone.waiter --save-dev```
+
+**bower**
+- ```bower install backbone.waiter ```
+
+**jspm**
+- ```jspm install npm:backbone.waiter ```
+
 ## Dist Files
 There are two main packages 
 
